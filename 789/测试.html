@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>臧鑫源·前端全栈开发实习生简历</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #e2e8f0;
+            /* 网页背景浅灰，打印时会自动变白 */
+            font-family: 'Segoe UI', 'Roboto', '微软雅黑', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.45;
+            color: #1e293b;
+            padding: 40px 20px;
+        }
+
+        /* 简历卡片：模拟纸张，干净专业 */
+        .resume-card {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            padding: 40px 42px;
+            transition: all 0.2s;
+        }
+
+        /* 打印样式：去掉背景、阴影，节省墨盒，保持一页 */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+
+            .resume-card {
+                box-shadow: none;
+                padding: 0.4in 0.35in;
+                max-width: 100%;
+                border-radius: 0;
+            }
+
+            .section-title {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            a,
+            .contact-line a {
+                text-decoration: none;
+                color: black;
+            }
+
+            .badge,
+            .skill-tag {
+                border: 1px solid #ccc;
+                background: #f9f9f9 !important;
+            }
+        }
+
+        /* 头部区：姓名 + 求职意向 */
+        .header {
+            border-bottom: 3px solid #2c5f8a;
+            padding-bottom: 18px;
+            margin-bottom: 24px;
+        }
+
+        .name {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #0f3b5c;
+            margin-bottom: 8px;
+        }
+
+        .job-tag {
+            font-size: 18px;
+            font-weight: 500;
+            color: #2c5f8a;
+            background: #eef4ff;
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 30px;
+            margin-top: 6px;
+        }
+
+        .contact-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin-top: 16px;
+            font-size: 14px;
+            color: #2d3e50;
+            background: #f8fafc;
+            padding: 10px 16px;
+            border-radius: 40px;
+        }
+
+        .contact-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .contact-item span:first-child {
+            font-weight: 500;
+        }
+
+        /* 网格布局：两栏结构 (左: 技能+证书+自我评价, 右: 教育+项目) */
+        .two-columns {
+            display: flex;
+            gap: 40px;
+            margin-top: 8px;
+        }
+
+        .left-column {
+            flex: 1.05;
+        }
+
+        .right-column {
+            flex: 2;
+        }
+
+        /* 通用模块样式 */
+        .section {
+            margin-bottom: 28px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e4a6e;
+            border-left: 5px solid #2c5f8a;
+            padding-left: 12px;
+            margin-bottom: 16px;
+            letter-spacing: -0.2px;
+        }
+
+        /* 技能表格 (极简卡片风格) */
+        .skill-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px;
+            background-color: #ffffff;
+        }
+
+        .skill-table td {
+            padding: 8px 6px 8px 0;
+            vertical-align: top;
+            border-bottom: 1px dashed #e2edf2;
+        }
+
+        .skill-table td:first-child {
+            font-weight: 700;
+            width: 90px;
+            color: #0f3b5c;
+        }
+
+        .skill-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .skill-note {
+            font-size: 12.5px;
+            background: #f1f5f9;
+            padding: 10px 12px;
+            border-radius: 12px;
+            margin-top: 12px;
+            color: #334155;
+            border-left: 3px solid #5b8cae;
+        }
+
+        /* 证书列表 (表格样式简约) */
+        .awards-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .awards-table th,
+        .awards-table td {
+            text-align: left;
+            padding: 8px 4px 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .awards-table th {
+            font-weight: 600;
+            color: #2c5f8a;
+            font-size: 13px;
+            border-bottom: 1px solid #cbd5e1;
+        }
+
+        .awards-table td {
+            color: #1e293b;
+        }
+
+        .awards-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* 教育卡片 */
+        .edu-item {
+            margin-bottom: 20px;
+        }
+
+        .edu-header {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            font-weight: 700;
+            font-size: 15px;
+            color: #0c4a6e;
+            margin-bottom: 6px;
+        }
+
+        .edu-date {
+            font-weight: 500;
+            color: #4a627a;
+            font-size: 13px;
+        }
+
+        .edu-detail {
+            padding-left: 0;
+            list-style: none;
+            margin-top: 6px;
+        }
+
+        .edu-detail li {
+            font-size: 13.5px;
+            margin-bottom: 5px;
+            position: relative;
+            padding-left: 18px;
+        }
+
+        .edu-detail li::before {
+            content: "•";
+            color: #2c5f8a;
+            font-weight: bold;
+            font-size: 14px;
+            position: absolute;
+            left: 4px;
+        }
+
+        /* 项目经历 */
+        .project-item {
+            margin-bottom: 28px;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-items: baseline;
+            margin-bottom: 8px;
+        }
+
+        .project-name {
+            font-size: 16px;
+            font-weight: 800;
+            color: #0f3b5c;
+            letter-spacing: -0.2px;
+        }
+
+        .project-role {
+            font-size: 13px;
+            font-weight: 500;
+            color: #2c5f8a;
+            background: #eef2ff;
+            padding: 2px 8px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .project-date {
+            font-size: 13px;
+            color: #5b6e8c;
+            font-weight: 500;
+        }
+
+        .project-desc {
+            font-size: 13.5px;
+            margin-top: 8px;
+        }
+
+        .project-desc p {
+            margin-bottom: 8px;
+        }
+
+        .tech-stack {
+            font-size: 12.5px;
+            background: #f1f6fa;
+            padding: 6px 12px;
+            border-radius: 18px;
+            display: inline-block;
+            margin: 8px 0 6px;
+            color: #1e4a6e;
+        }
+
+        .project-list {
+            padding-left: 20px;
+            margin-top: 6px;
+        }
+
+        .project-list li {
+            font-size: 13.5px;
+            margin-bottom: 6px;
+        }
+
+        /* 自我评价 列表样式 */
+        .self-eval-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .self-eval-list li {
+            font-size: 13.5px;
+            margin-bottom: 12px;
+            display: flex;
+            gap: 8px;
+            align-items: baseline;
+        }
+
+        .self-eval-list li strong {
+            color: #1e4a6e;
+            min-width: 85px;
+            font-weight: 700;
+        }
+
+        /* 响应式: 小于750px变成单栏 */
+        @media (max-width: 750px) {
+            .resume-card {
+                padding: 20px;
+            }
+
+            .two-columns {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .contact-bar {
+                gap: 12px;
+                flex-wrap: wrap;
+            }
+        }
+
+        /* 小细节 */
+        hr {
+            margin: 12px 0;
+            border: 0;
+            height: 1px;
+            background: #e2edf2;
+        }
+
+        .badge-icon {
+            font-size: 14px;
+        }
+
+        a {
+            color: #1e293b;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="resume-card">
+        <!-- 头部信息 -->
+        <div class="header">
+            <div class="name">臧鑫源</div>
+            <div class="job-tag">前端开发实习生 / 全栈开发实习生</div>
+            <div class="contact-bar">
+                <div class="contact-item"><span>📞</span> 15266369829</div>
+                <div class="contact-item"><span>✉️</span> 3464059006@qq.com</div>
+                <div class="contact-item"><span>📍</span> 山东青岛</div>
+            </div>
+        </div>
+
+        <!-- 左右核心内容区 -->
+        <div class="two-columns">
+            <!-- 左侧栏：技术栈 + 获奖证书 + 自我评价 (紧凑) -->
+            <div class="left-column">
+                <!-- 技术栈 -->
+                <div class="section">
+                    <div class="section-title">技术栈</div>
+                    <table class="skill-table">
+                        <tr>
+                            <td>前端</td>
+                            <td>HTML5 / CSS3 / JavaScript (ES6+) 、 <strong>Vue3</strong>、TypeScript（学习中）</td>
+                        </tr>
+                        <tr>
+                            <td>后端&数据库</td>
+                            <td>Node.js + Express、Java（了解Spring Boot框架）、MySQL、Access（基础）</td>
+                        </tr>
+                        <tr>
+                            <td>开发工具</td>
+                            <td>Git、VSCode、Postman，以及多种AI编程助手（辅助提效）</td>
+                        </tr>
+                        <tr>
+                            <td>其他</td>
+                            <td>Photoshop（基础）、计算机组装与维修</td>
+                        </tr>
+                    </table>
+                    <div class="skill-note">
+                        💡 具备扎实的C/C++基础，有助于理解底层性能优化与算法设计。
+                    </div>
+                </div>
+
+                <!-- 获奖与证书 (表格精简) -->
+                <div class="section">
+                    <div class="section-title">获奖与证书</div>
+                    <table class="awards-table">
+                        <thead>
+                            <tr>
+                                <th>奖项/证书</th>
+                                <th>时间</th>
+                                <th>级别</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>第十六届蓝桥杯省三等奖</td>
+                                <td>2025.05</td>
+                                <td>省级</td>
+                            </tr>
+                            <tr>
+                                <td>IITC工信人才岗位能力评价证书</td>
+                                <td>2025.10</td>
+                                <td>省级</td>
+                            </tr>
+                            <tr>
+                                <td>HarmonyOS应用开发者基础认证</td>
+                                <td>2025.12</td>
+                                <td>国家级</td>
+                            </tr>
+                            <tr>
+                                <td>华为ICT大赛网络赛道 高教组三等奖</td>
+                                <td>2026.03</td>
+                                <td>华为</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 自我评价 -->
+                <div class="section">
+                    <div class="section-title">自我评价</div>
+                    <ul class="self-eval-list">
+                        <li><strong>学习能力强</strong> 从职高以610分考入本科，能快速掌握Vue3、TypeScript等新技术。</li>
+                        <li><strong>责任心突出</strong> 担任工作室安全管理员，主动开发系统解决实际痛点，推动问题闭环。</li>
+                        <li><strong>动手能力强</strong> 独立完成全栈项目，理解从需求分析到上线的完整流程。</li>
+                        <li><strong>实习时间</strong> 每周可保证30小时以上，可尽快到岗。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 右侧栏：教育背景 + 项目经历 (核心亮点) -->
+            <div class="right-column">
+                <!-- 教育背景 -->
+                <div class="section">
+                    <div class="section-title">教育背景</div>
+                    <div class="edu-item">
+                        <div class="edu-header">
+                            <span>青岛黄海学院 · 物联网工程（本科）</span>
+                            <span class="edu-date">2024.09 – 至今</span>
+                        </div>
+                        <ul class="edu-detail">
+                            <li>春季高考610分（满分750）升入本科，专业排名前15%</li>
+                            <li>主修课程：数据结构、计算机网络、Java、MySQL</li>
+                        </ul>
+                    </div>
+                    <div class="edu-item">
+                        <div class="edu-header">
+                            <span>潍坊市工程技师学院（原职高）· 软件与应用技术</span>
+                            <span class="edu-date">2021.09 – 2024.06</span>
+                        </div>
+                        <ul class="edu-detail">
+                            <li>连续三年获校一等奖学金，年级排名前10%</li>
+                            <li>主修C语言、数据库基础，打下扎实编程功底</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 项目经历 -->
+                <div class="section">
+                    <div class="section-title">项目经历</div>
+                    <div class="project-item">
+                        <div class="project-header">
+                            <div class="project-name">工作室安全检查系统</div>
+                            <div class="project-date">2024.09 – 至今</div>
+                        </div>
+                        <div><span class="project-role">独立全栈开发</span></div>
+                        <div class="project-desc">
+                            <p><strong>项目背景</strong>：为学校工作室设计的安全管理Web应用，解决纸质检查效率低、整改难追踪、责任不明确等问题。</p>
+                            <div class="tech-stack">🔧 Vue3 + Vite + Element Plus · Node.js + Express · MySQL</div>
+                            <ul class="project-list">
+                                <li><strong>技术实现</strong>：前端实现检查表录入、拍照上传（自动水印）、多角色权限控制、消息提醒、报表统计导出；后端设计RESTful
+                                    API，利用C++编程思维优化批量导出与图片流式处理性能；数据库设计检查记录、整改任务、用户角色等核心表；预留AI接口（计划TensorFlow.js实现隐患识别）。
+                                </li>
+                                <li><strong>成果与价值</strong>：已覆盖8个工作室约50名成员试运行；单次检查耗时从30分钟降至10分钟，整改闭环率从不足60%提升至95%；获得工作室负责老师认可，拟推广至其他学院。
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- 可额外扩展项目（如有）但保持一页清爽，当前一个重点项目足够有力 -->
+                </div>
+                <!-- 如有第二项目可加在这里，保持一页内不超，目前完美 -->
+            </div>
+        </div>
+        <!-- 简历最下方不额外加分割线，保持干净 -->
+        <div style="height: 6px;"></div>
+    </div>
+</body>
+
+</html>

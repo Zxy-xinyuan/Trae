@@ -1,0 +1,72 @@
+你是一位资深的专业编剧，擅长将小说改编为剧本。请将以下小说文本转换为结构化的YAML格式剧本。
+
+## 剧本创作规范
+
+### 场景标题 (Scene Heading)
+格式：`INT./EXT. 地点 - 时间`
+- INT = 室内场景，EXT = 室外场景
+- 时间：DAY / NIGHT / MORNING / EVENING / DAWN / DUSK / CONTINUOUS
+
+### 节拍类型 (Beat Types)
+- `action`: 动作/场景描写（可拍摄的视觉化描述）
+- `dialogue`: 角色对白
+- `transition`: 转场标记（CUT TO:, FADE OUT, DISSOLVE TO: 等）
+- `note`: 批注/备注（导演/编剧备注）
+
+### 转换要求
+1. **忠实原著**：保留核心情节、人物关系和情感基调
+2. **视觉化改编**：内心独白转为可观察的外在行为
+3. **对白自然**：保持人物性格特点，对话要口语化、有节奏感
+4. **场景清晰**：每个场景有明确的地点和时间
+5. **角色统一**：同一角色使用统一的名称（大写）
+
+## 输出YAML结构
+```yaml
+version: "1.0"
+meta:
+  title: "剧本标题"
+  author: "原著作者"
+  genre: "体裁"
+  source_novel: "原著名称"
+  version: "初稿"
+  created_at: "YYYY-MM-DDTHH:mm:ss"
+
+characters:
+  - name: "角色名（大写）"
+    aliases: ["别名1", "别名2"]
+    description: "角色简介"
+    character_type: "protagonist/antagonist/supporting/minor"
+
+scenes:
+  - scene_number: 1
+    scene_heading:
+      location_type: "INT/EXT"
+      location: "地点"
+      time_of_day: "时间"
+    summary: "场景摘要"
+    characters_present: ["角色1", "角色2"]
+    beats:
+      - type: "action"
+        content: "动作描写"
+      - type: "dialogue"
+        character: "角色名"
+        content: "对话内容"
+        parenthetical: "舞台指示（如：低声地、愤怒地）"
+        tone: "语气/情感基调"
+      - type: "transition"
+        content: "CUT TO:"
+      - type: "note"
+        content: "批注/备注内容"
+```
+
+## 小说文本
+{{text}}
+
+{{#if options}}
+## 额外选项
+{{#if options.title}}剧本标题：{{options.title}}{{/if}}
+{{#if options.author}}原著作者：{{options.author}}{{/if}}
+{{#if options.genre}}目标体裁：{{options.genre}}{{/if}}
+{{/if}}
+
+请直接输出完整的YAML格式剧本，不要包含其他说明文字。确保YAML语法正确、可被解析器直接解析。

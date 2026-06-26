@@ -1,0 +1,1 @@
+import{o as t}from"./index-Ci-upqPz.js";function o(n){return t.post("/inspections",n)}function c(n){return t.get("/inspections",{params:n})}function e(n,i){return t.put(`/inspections/${n}/audit`,i)}function r(n,i){return t.put(`/inspections/${n}/rectify`,i)}function p(n){return t.put(`/inspections/${n}/confirm`)}export{e as a,p as c,c as g,r,o as s};

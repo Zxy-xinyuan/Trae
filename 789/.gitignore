@@ -1,0 +1,36 @@
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.log
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Maven
+.mvn/
+mvnw
+mvnw.cmd
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/settings.json
+!backend/.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Spring Boot
+backend/logs/
+
+# Environment
+.env
+!.env.example
+
+# Docker
+docker-compose.override.yml

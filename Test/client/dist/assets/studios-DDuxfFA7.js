@@ -1,0 +1,1 @@
+import{o as u}from"./index-Ci-upqPz.js";function s(){return u.get("/studios")}function i(t){return u.post("/studios",t)}function d(t,o){return u.put(`/studios/${t}`,o)}function n(t){return u.delete(`/studios/${t}`)}export{i as c,n as d,s as g,d as u};

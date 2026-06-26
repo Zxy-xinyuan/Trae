@@ -1,0 +1,20 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: novel2script
+
+# LLM 配置 — 支持任何兼容 OpenAI 格式的服务
+llm:
+  api-key: ${LLM_API_KEY:sk-your-api-key}
+  base-url: ${LLM_BASE_URL:https://api.deepseek.com}
+  model: ${LLM_MODEL:deepseek-chat}
+  max-tokens: ${LLM_MAX_TOKENS:8192}
+  temperature: ${LLM_TEMPERATURE:0.3}
+  timeout: ${LLM_TIMEOUT:120}
+
+# 转换配置
+conversion:
+  max-chapter-length: 50000
+  max-chapters: 50
